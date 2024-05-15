@@ -8,6 +8,7 @@ import ReleasedYearIcon from "../../assets/img/press-release.png";
 import WriterIcon from "../../assets/img/writer.png";
 import YearIcon from "../../assets/img/year.png";
 import PlotIcon from "../../assets/img/plot.png";
+import MovieImage from "../../assets/img/film.png";
 import { useLazyGetMovieDetailByIdQuery } from "../../api/appApi";
 import { LoadingScreen } from "../../components/loading-screen/loading-screen";
 import * as S from "./MovieDetail.styled";
@@ -48,7 +49,9 @@ export const MovieDetail: React.FC = () => {
 
       <Grid item xs={12}>
         <S.StyledBoxRow>
-          <S.StyledImageBox src={data?.Poster} />
+          <S.StyledImageBox
+            src={data?.Poster !== "N/A" ? data?.Poster : MovieImage}
+          />
 
           <Grid container spacing={2} ml={2}>
             <Grid item xs={4}>
