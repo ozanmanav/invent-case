@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 export const StyledDataGrid = styled(DataGrid)({
@@ -7,4 +7,9 @@ export const StyledDataGrid = styled(DataGrid)({
   "& .MuiDataGrid-row": {
     cursor: "pointer",
   },
+});
+
+export const StyledBox = styled(Box)({
+  display: "flex",
+  flexDirection: "row",
 });

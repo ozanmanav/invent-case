@@ -11,13 +11,26 @@ const appApi = createApi({
   reducerPath: "appApi",
   baseQuery: baseQuery,
   endpoints: (builder) => ({
-    getMovies: builder.query<any, { input: string; page: number }>({
-      query: (arg: { input: string; page: number }) => ({
+    getMovies: builder.query<
+      any,
+      { input: string; page: number; year: string }
+    >({
+      query: (arg: { input: string; page: number; year: string }) => ({
         url: "",
         params: {
           ...baseParams,
           s: arg.input,
           page: arg.page,
+          y: arg.year,
+        },
+      }),
+    }),
+    getMovieDetailById: builder.query<any, { id: string }>({
+      query: (arg: { id: string }) => ({
+        url: "",
+        params: {
+          ...baseParams,
+          i: arg.id,
         },
       }),
     }),
@@ -26,4 +39,4 @@ const appApi = createApi({
 
 export { appApi };
 
-export const { useLazyGetMoviesQuery } = appApi;
+export const { useLazyGetMoviesQuery, useLazyGetMovieDetailByIdQuery } = appApi;

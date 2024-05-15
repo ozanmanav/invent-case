@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { MoviesTable } from "../components/movies-table/movies-table";
+import { MoviesTable } from "../../components/movies-table/movies-table";
 
 export const Movies: React.FC = () => {
   return (

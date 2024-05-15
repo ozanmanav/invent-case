@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
-import { Movies } from "../pages/Movies";
-import { MovieDetail } from "../pages/MovieDetail";
+import { Movies } from "../pages/movies/Movies";
+import { MovieDetail } from "../pages/movie-detail/MovieDetail";
 
 export const MainRoutes = {
   path: "/",
