@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Avatar, Button, Grid, Typography } from "@mui/material";
+import { useLazyGetMovieDetailByIdQuery } from "../../api/appApi";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import DirectorChairIcon from "../../assets/img/director-chair.png";
@@ -9,10 +10,9 @@ import WriterIcon from "../../assets/img/writer.png";
 import YearIcon from "../../assets/img/year.png";
 import PlotIcon from "../../assets/img/plot.png";
 import MovieImage from "../../assets/img/film.png";
-import { useLazyGetMovieDetailByIdQuery } from "../../api/appApi";
 import { LoadingScreen } from "../../components/loading-screen/loading-screen";
-import * as S from "./MovieDetail.styled";
 import { DetailCard } from "../../components/detail-card/detail-card";
+import * as S from "./MovieDetail.styled";
 
 export const MovieDetail: React.FC = () => {
   const navigate = useNavigate();

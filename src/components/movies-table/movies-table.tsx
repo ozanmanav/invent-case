@@ -1,18 +1,17 @@
 import { useEffect } from "react";
-import { useDebouncedCallback } from "use-debounce";
 import { useNavigate } from "react-router";
+import { SelectChangeEvent } from "@mui/material";
 import { GridPaginationModel, GridRowParams } from "@mui/x-data-grid";
-import { getMoviesTableColumns } from "./movies-table.columns";
+import { useDebouncedCallback } from "use-debounce";
 import { useLazyGetMoviesQuery } from "../../api/appApi";
+import { getMoviesTableColumns } from "./movies-table.columns";
 import { transformMoviesTableData } from "../../utils/transformMoviesTableData";
-import * as S from "./movies-table.styled";
-
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useHandleChange } from "../hooks/useHandleChange";
 import { MovieSearchTextField } from "../movie-search-text-field/movie-search-text-field";
 import { CustomDropdown } from "../custom-drowpdown/custom-dropdown";
-import { SelectChangeEvent } from "@mui/material";
 import { getYears } from "../../utils/getYears";
+import * as S from "./movies-table.styled";
 
 const types = ["movie", "series", "episode"];
 
