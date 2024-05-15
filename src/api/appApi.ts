@@ -13,15 +13,26 @@ const appApi = createApi({
   endpoints: (builder) => ({
     getMovies: builder.query<
       any,
-      { input: string; page: number; year: string }
+      {
+        input: string;
+        page: number;
+        year: string;
+        type: string;
+      }
     >({
-      query: (arg: { input: string; page: number; year: string }) => ({
+      query: (arg: {
+        input: string;
+        page: number;
+        year: string;
+        type: string;
+      }) => ({
         url: "",
         params: {
           ...baseParams,
           s: arg.input,
           page: arg.page,
           y: arg.year,
+          type: arg.type,
         },
       }),
     }),

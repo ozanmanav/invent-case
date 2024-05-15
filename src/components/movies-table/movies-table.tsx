@@ -10,22 +10,32 @@ import * as S from "./movies-table.styled";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useHandleChange } from "../hooks/useHandleChange";
 import { MovieSearchTextField } from "../movie-search-text-field/movie-search-text-field";
-import { YearsDropdown } from "../years-drowpdown/years-dropdown";
+import { CustomDropdown } from "../custom-drowpdown/custom-dropdown";
 import { SelectChangeEvent } from "@mui/material";
+import { getYears } from "../../utils/getYears";
+
+const types = ["movie", "series", "episode"];
 
 export const MoviesTable: React.FC = () => {
+  const years = getYears();
   const columns = getMoviesTableColumns();
   const navigate = useNavigate();
 
   const [input, setInput] = useLocalStorage("input", "Pokemon");
   const [page, setPage] = useLocalStorage("page", 0);
   const [selectedYear, setSelectedYear] = useLocalStorage("selectedYear", "");
+  const [selectedType, setSelectedType] = useLocalStorage("selectedType", "");
 
   const [getMoviesQuery, { data, isFetching, error }] = useLazyGetMoviesQuery();
   const rows = transformMoviesTableData(data?.Search || []);
 
   const getMovies = () =>
-    getMoviesQuery({ input: input, page: page + 1, year: selectedYear });
+    getMoviesQuery({
+      input: input,
+      page: page + 1,
+      year: selectedYear,
+      type: selectedType,
+    });
 
   const debouncedGetMovies = useDebouncedCallback(
     () => {
@@ -37,7 +47,7 @@ export const MoviesTable: React.FC = () => {
 
   useEffect(() => {
     debouncedGetMovies();
-  }, [input, page, selectedYear]);
+  }, [input, page, selectedYear, selectedType]);
 
   const handlePaginationModelChange = ({ page }: GridPaginationModel) => {
     setPage(page);
@@ -53,6 +63,14 @@ export const MoviesTable: React.FC = () => {
       return;
     }
     setSelectedYear(event.target.value as string);
+  };
+
+  const handleTypeChange = (event: SelectChangeEvent<unknown>) => {
+    if (event.target.value === "Select No filter") {
+      setSelectedType("");
+      return;
+    }
+    setSelectedType(event.target.value as string);
   };
 
   const handleRowClick = (params: GridRowParams) => {
@@ -71,9 +89,18 @@ export const MoviesTable: React.FC = () => {
           clearSearch={clearSearch}
         />
 
-        <YearsDropdown
+        <CustomDropdown
           handleChange={handleYearChange}
           selectedYear={selectedYear}
+          list={years}
+          label="Select year"
+        />
+
+        <CustomDropdown
+          handleChange={handleTypeChange}
+          selectedYear={selectedType}
+          list={types}
+          label="Select type"
         />
       </S.StyledBox>
 

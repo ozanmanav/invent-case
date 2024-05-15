@@ -1,26 +1,23 @@
 import { InputLabel, MenuItem, SelectChangeEvent } from "@mui/material";
-import * as S from "./years-dropdown.styled";
+import * as S from "./custom-dropdown.styled";
 
 interface Props {
   selectedYear: string;
   handleChange: (event: SelectChangeEvent<unknown>) => void;
+  list: string[] | number[];
+  label: string;
 }
 
-export const YearsDropdown: React.FC<Props> = ({
+export const CustomDropdown: React.FC<Props> = ({
   handleChange,
   selectedYear,
+  list,
+  label,
 }) => {
-  const currentYear = new Date().getFullYear();
-  const earliestYear = 1970;
-  const years = Array.from(
-    { length: currentYear - earliestYear + 1 },
-    (_, index) => currentYear - index
-  );
-
   return (
     <S.StyledBox>
       <InputLabel sx={{ marginLeft: "20px" }} id="demo-simple-select-label">
-        Select year
+        {label}
       </InputLabel>
       <S.StyledSelect
         value={selectedYear}
@@ -31,9 +28,10 @@ export const YearsDropdown: React.FC<Props> = ({
         <MenuItem key={"Select No filter"} value={"Select No filter"}>
           {"Select No filter"}
         </MenuItem>
-        {years.map((year) => (
-          <MenuItem key={year} value={year}>
-            {year}
+
+        {list.map((item) => (
+          <MenuItem key={item} value={item}>
+            {item}
           </MenuItem>
         ))}
       </S.StyledSelect>
