@@ -1,5 +1,4 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-
 import { baseQuery } from "./baseQuery";
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
@@ -12,12 +11,13 @@ const appApi = createApi({
   reducerPath: "appApi",
   baseQuery: baseQuery,
   endpoints: (builder) => ({
-    getMovies: builder.query({
-      query: (arg: { input: string }) => ({
+    getMovies: builder.query<any, { input: string; page: number }>({
+      query: (arg: { input: string; page: number }) => ({
         url: "",
         params: {
           ...baseParams,
           s: arg.input,
+          page: arg.page,
         },
       }),
     }),
@@ -26,4 +26,4 @@ const appApi = createApi({
 
 export { appApi };
 
-export const { useGetMoviesQuery } = appApi;
+export const { useLazyGetMoviesQuery } = appApi;

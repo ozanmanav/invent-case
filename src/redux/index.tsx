@@ -3,13 +3,11 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { appApi } from "../api/appApi";
-import { movieSlice } from "./movieSlice";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [appApi.reducerPath]: appApi.reducer,
-    movieSlice: movieSlice.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

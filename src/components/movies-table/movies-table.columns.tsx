@@ -1,9 +1,6 @@
-import { Typography } from "@mui/material";
-import { GridColDef, GridColumnHeaderParams } from "@mui/x-data-grid";
-
-const HeaderCell = (params: GridColumnHeaderParams) => {
-  return <Typography fontWeight={600}>{params.colDef.headerName}</Typography>;
-};
+import { GridColDef } from "@mui/x-data-grid";
+import { HeaderCell } from "../table-cells/header-cell";
+import { AvatarCell } from "../table-cells/avatar-cell";
 
 const defaultConfig: Partial<GridColDef> = {
   flex: 0.5,
@@ -14,28 +11,29 @@ const defaultConfig: Partial<GridColDef> = {
 export const getMoviesTableColumns = () => {
   return [
     {
-      field: "id",
+      field: "Poster",
+      headerName: "Poster",
+      ...defaultConfig,
+      renderCell: AvatarCell,
+    },
+    {
+      field: "imdbID",
       headerName: "ID",
       ...defaultConfig,
     },
     {
-      field: "title",
+      field: "Title",
       headerName: "Title",
       ...defaultConfig,
     },
     {
-      field: "releaseDate",
-      headerName: "Release Date",
+      field: "Year",
+      headerName: "Year",
       ...defaultConfig,
     },
     {
-      field: "genre",
-      headerName: "Genre",
-      ...defaultConfig,
-    },
-    {
-      field: "rating",
-      headerName: "Rating",
+      field: "Type",
+      headerName: "Type",
       ...defaultConfig,
     },
   ];
