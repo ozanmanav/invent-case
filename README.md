@@ -74,7 +74,6 @@ This will serve the production build of your application locally, allowing you t
 - **Redux Toolkit**: A library for efficient Redux development.
 - **Emotion**: A library for writing CSS styles with JavaScript.
 - **Material-UI**: A popular React UI framework.
-- **Axios**: A promise-based HTTP client for the browser and Node.js.
 - **use-debounce**: A hook to debounce state changes.
 - **Vite**: A blazing fast frontend build tool.
 
