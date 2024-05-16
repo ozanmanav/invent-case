@@ -5,11 +5,10 @@ import { GridPaginationModel, GridRowParams } from "@mui/x-data-grid";
 import { useDebouncedCallback } from "use-debounce";
 import { useLazyGetMoviesQuery } from "../../api/appApi";
 import { getMoviesTableColumns } from "./movies-table.columns";
-import { transformMoviesTableData } from "../../utils/transformMoviesTableData";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { useHandleChange } from "../hooks/useHandleChange";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { useHandleChange } from "../../hooks/useHandleChange";
 import { MovieSearchTextField } from "../movie-search-text-field/movie-search-text-field";
-import { CustomDropdown } from "../custom-drowpdown/custom-dropdown";
+import { CustomDropdown } from "../custom-dropdown/custom-dropdown";
 import { getYears } from "../../utils/getYears";
 import * as S from "./movies-table.styled";
 
@@ -22,18 +21,23 @@ export const MoviesTable: React.FC = () => {
 
   const [input, setInput] = useLocalStorage("input", "Pokemon");
   const [page, setPage] = useLocalStorage("page", 0);
-  const [selectedYear, setSelectedYear] = useLocalStorage("selectedYear", "");
-  const [selectedType, setSelectedType] = useLocalStorage("selectedType", "");
+  const [selectedYear, setSelectedYear] = useLocalStorage(
+    "selectedYear",
+    "All"
+  );
+  const [selectedType, setSelectedType] = useLocalStorage(
+    "selectedType",
+    "All"
+  );
 
   const [getMoviesQuery, { data, isFetching, error }] = useLazyGetMoviesQuery();
-  const rows = transformMoviesTableData(data?.Search || []);
 
   const getMovies = () =>
     getMoviesQuery({
       input: input,
       page: page + 1,
-      year: selectedYear,
-      type: selectedType,
+      year: selectedYear === "All" ? "" : selectedYear,
+      type: selectedType === "All" ? "" : selectedType,
     });
 
   const debouncedGetMovies = useDebouncedCallback(
@@ -57,18 +61,10 @@ export const MoviesTable: React.FC = () => {
   const handleSearch = useHandleChange<string>(setInput);
 
   const handleYearChange = (event: SelectChangeEvent<unknown>) => {
-    if (event.target.value === "Select No filter") {
-      setSelectedYear("");
-      return;
-    }
     setSelectedYear(event.target.value as string);
   };
 
   const handleTypeChange = (event: SelectChangeEvent<unknown>) => {
-    if (event.target.value === "Select No filter") {
-      setSelectedType("");
-      return;
-    }
     setSelectedType(event.target.value as string);
   };
 
@@ -104,7 +100,7 @@ export const MoviesTable: React.FC = () => {
       </S.StyledBox>
 
       <S.StyledDataGrid
-        rows={rows}
+        rows={data?.Search || []}
         columns={columns}
         rowCount={parseInt(data?.totalResults || "0")}
         paginationMode="server"
@@ -113,6 +109,7 @@ export const MoviesTable: React.FC = () => {
         onPaginationModelChange={handlePaginationModelChange}
         loading={isFetching}
         onRowClick={handleRowClick}
+        getRowId={(row) => row.imdbID}
       />
     </>
   );

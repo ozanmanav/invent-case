@@ -1,4 +1,4 @@
-import { InputLabel, MenuItem, SelectChangeEvent } from "@mui/material";
+import { MenuItem, SelectChangeEvent, capitalize } from "@mui/material";
 import * as S from "./custom-dropdown.styled";
 
 interface Props {
@@ -16,22 +16,21 @@ export const CustomDropdown: React.FC<Props> = ({
 }) => {
   return (
     <S.StyledBox>
-      <InputLabel sx={{ marginLeft: "20px" }} id="demo-simple-select-label">
-        {label}
-      </InputLabel>
+      <S.StyledInputLabel>{label}</S.StyledInputLabel>
+
       <S.StyledSelect
         value={selectedYear}
         onChange={handleChange}
         placeholder="Select year"
-        labelId="demo-simple-select-label"
+        label={label}
       >
-        <MenuItem key={"Select No filter"} value={"Select No filter"}>
-          {"Select No filter"}
+        <MenuItem key="All" value="All">
+          All
         </MenuItem>
 
         {list.map((item) => (
           <MenuItem key={item} value={item}>
-            {item}
+            {typeof item === "number" ? item : capitalize(item)}
           </MenuItem>
         ))}
       </S.StyledSelect>

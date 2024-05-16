@@ -1,5 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "./baseQuery";
+import {
+  GetMoviesQueryInput,
+  GetMoviesQueryResponse,
+  GetMovieDetailByIdQueryInput,
+  GetMovieDetailByIdQueryResponse,
+} from "../types/types";
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 const baseParams = {
@@ -7,37 +13,26 @@ const baseParams = {
 };
 
 const appApi = createApi({
-  // Set the baseUrl for every endpoint below
   reducerPath: "appApi",
   baseQuery: baseQuery,
   endpoints: (builder) => ({
-    getMovies: builder.query<
-      any,
-      {
-        input: string;
-        page: number;
-        year: string;
-        type: string;
-      }
-    >({
-      query: (arg: {
-        input: string;
-        page: number;
-        year: string;
-        type: string;
-      }) => ({
+    getMovies: builder.query<GetMoviesQueryResponse, GetMoviesQueryInput>({
+      query: (arg) => ({
         url: "",
         params: {
           ...baseParams,
           s: arg.input,
           page: arg.page,
-          y: arg.year,
-          type: arg.type,
+          ...(arg.year !== "" && { y: arg.year }),
+          ...(arg.type !== "" && { type: arg.type }),
         },
       }),
     }),
-    getMovieDetailById: builder.query<any, { id: string }>({
-      query: (arg: { id: string }) => ({
+    getMovieDetailById: builder.query<
+      GetMovieDetailByIdQueryResponse,
+      GetMovieDetailByIdQueryInput
+    >({
+      query: (arg) => ({
         url: "",
         params: {
           ...baseParams,

@@ -1,30 +1,88 @@
-# React + TypeScript + Vite
+# Intense POC
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+This project is case application built with React.js and TypeScript, using Vite.js as the build tool. It integrates various libraries and tools for state management, styling, routing, data fetching, and more.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Developed by Ozan Manav
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To install the dependencies, run:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+npm install
+# or
+yarn install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Usage
+
+### Development
+
+To start the development server, run:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+This will start Vite's development server, allowing you to view your application in the browser. Changes to your source files will trigger hot module replacement (HMR), providing a fast development experience.
+
+### Production Build
+
+To build the project for production, run:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+This command compiles your TypeScript code using TypeScript compiler (`tsc`) and then builds your application for production using Vite.
+
+### Linting
+
+To lint your TypeScript and React code, run:
+
+```bash
+npm run lint
+# or
+yarn lint
+```
+
+This command uses ESLint with TypeScript support to analyze your code for potential errors and enforce code style conventions.
+
+### Preview
+
+To preview the production build locally, run:
+
+```bash
+npm run preview
+# or
+yarn preview
+```
+
+This will serve the production build of your application locally, allowing you to test it before deployment.
+
+## Dependencies
+
+- **React**: A JavaScript library for building user interfaces.
+- **React DOM**: The entry point to the React library for the web.
+- **React Router**: A routing library for React applications.
+- **Redux Toolkit**: A library for efficient Redux development.
+- **Emotion**: A library for writing CSS styles with JavaScript.
+- **Material-UI**: A popular React UI framework.
+- **Axios**: A promise-based HTTP client for the browser and Node.js.
+- **use-debounce**: A hook to debounce state changes.
+- **Vite**: A blazing fast frontend build tool.
+
+## Dev Dependencies
+
+- **TypeScript**: A typed superset of JavaScript.
+- **ESLint**: A pluggable linting utility for JavaScript and JSX.
+- **@typescript-eslint/eslint-plugin**: ESLint plugin for TypeScript.
+- **@vitejs/plugin-react**: Vite plugin for React development.
+- **eslint-plugin-react-hooks**: ESLint plugin for React Hooks.
+- **vite-tsconfig-paths**: Vite plugin for TypeScript path aliasing.

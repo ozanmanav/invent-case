@@ -17,11 +17,11 @@ export const MovieSearchTextField: FC<Props> = ({
 }) => {
   return (
     <S.SearchTextFieldWrapper
-      size="small"
       placeholder="Enter movie name"
       value={input}
       onChange={handleSearch}
       variant="outlined"
+      label="Search"
       InputProps={{
         startAdornment: <S.SearchIcon fontSize="small" />,
         endAdornment: (

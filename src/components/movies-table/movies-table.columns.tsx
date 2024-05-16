@@ -1,10 +1,12 @@
 import { GridColDef } from "@mui/x-data-grid";
-import { HeaderCell } from "../table-cells/header-cell";
-import { AvatarCell } from "../table-cells/avatar-cell";
+import { HeaderCell } from "./table-cells/header-cell";
+import { AvatarCell } from "./table-cells/avatar-cell";
 
 const defaultConfig: Partial<GridColDef> = {
   flex: 0.5,
   sortable: false,
+  filterable: false,
+  disableColumnMenu: true,
   renderHeader: HeaderCell,
 };
 
